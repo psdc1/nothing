@@ -1,0 +1,1729 @@
+﻿LCLICK(939,730)  // 12832475
+/// постоянные переменные
+$priceItem = 0
+$priceItemMax = 0
+$sdvig = 8
+$filename= MonsterName.txt
+$file= MonsterPrice.txt
+
+
+
+
+sub(setLvl,$lvl,$char)
+
+$indexGen = $indexGen + 1
+
+// Выбор уровня
+IF($lvl=4)
+move(937,273)
+waitms(1000)
+ldown(974,274)
+waitms(1001)
+lup(937,273)
+waitms(1003)
+ldown(953,409) // 4 уровень
+waitms(1000)
+lup(953,409)
+waitms(1000)
+
+$lvlGen = 4
+End_if
+
+// Выбор уровня
+IF($lvl=5)
+move(978,268)
+waitms(1000)
+ldown(978,268)
+waitms(1000)
+lup(978,268)
+waitms(1000)
+ldown(976,431) // 5 уровень
+waitms(1000)
+lup(976,431)
+waitms(1000)
+
+$lvlGen = 5
+End_if
+
+// Выбор уровня
+IF($lvl=6)
+move(978,268)
+waitms(350)
+ldown(978,268)
+waitms(350)
+lup(978,268)
+waitms(350)
+ldown(976,461) // 6 уровень
+waitms(350)
+lup(976,461)
+waitms(350)
+
+$lvlGen = 6
+End_if
+
+// Выбор уровня
+IF($lvl=7)
+move(978,268)
+waitms(350)
+ldown(978,268)
+waitms(350)
+lup(978,268)
+waitms(350)
+ldown(971,490) // 7 уровень
+waitms(350)
+lup(971,490)
+waitms(350)
+
+$lvlGen = 7
+End_if
+
+// Выбор уровня
+IF($lvl=8)
+move(978,268)
+waitms(350)
+ldown(978,268)
+waitms(350)
+lup(978,268)
+waitms(350)
+ldown(966,511) // 8 уровень
+waitms(350)
+lup(966,511)
+waitms(350)
+
+$lvlGen = 8
+End_if
+
+// Выбор чара
+IF($char=0)
+move(1101,270)
+waitms(350)
+ldown(1101,270)
+waitms(350)
+lup(1101,270)
+waitms(350)
+ldown(1114,319) // 0 чар
+waitms(350)
+lup(1114,319)
+waitms(350)
+
+$charGen = 0
+End_if
+
+IF($char=1)
+// Выбор чара
+move(1101,270)
+waitms(500)
+ldown(1101,270)
+waitms(350)
+lup(1101,270)
+waitms(350)
+ldown(1115,349) // 1 чар
+waitms(350)
+lup(1115,349)
+waitms(350)
+
+$charGen = 0
+End_if
+
+End_Sub
+
+
+
+
+
+sub(zakupka1,$per1,$per2)
+// Мои заказы
+ldown(1384,574)
+waitms(230)
+lup(1384,574)
+waitms(230)
+// Снятие позиций
+FOR($a=0,$a<4)
+
+ldown(1311,411)
+waitms(186)
+lup(1311,411)
+waitms(685)
+END_CYC
+// Заказ на покупку
+move(1388,490)
+waitms(116)
+ldown(1388,490)
+waitms(110)
+lup(1388,490)
+waitms(230)
+
+print("Считываю предмет: ", TFREAD($filename, $indexGen))
+WAITMS(100)
+print("Его минимальная цена: ", TFREAD($file, $indexGen))
+   WAITMS(100)
+
+
+//Выбор первой позиции
+move(1276,430)
+waitms(116)
+ldown(1276,430)
+waitms(120)
+lup(1276,430)
+waitms(230)
+// Выбор качества
+move(836,401)
+waitms(116)
+ldown(836,401)
+waitms(120)
+lup(836,401)
+waitms(230)
+move(831,451)
+waitms(116)
+ldown(831,451)
+waitms(120)
+lup(831,451)
+waitms(230)
+
+MOVE(635,632)  //тык на цену
+waitms(100)
+LDOWN(635,632)
+waitms(100)
+LUP(635,632)
+WAITMS(400)  
+
+KEYDOWN(#CTRL)     // скопировал цену
+WAITMS(100)  
+KEYPRESS(#C)
+WAITMS(100)
+KEYUP(#CTRL)
+
+
+$priceItem =  FROMCLIP()
+WAITMS(100)
+$priceItemMax = TFREAD($file, $indexGen)
+WAITMS(100)
+print("Цепанул цену, это: ", $priceItem)
+												WAITMS(100)
+IF($priceItem < $priceItemMax)
+
+print("Годится. Закупаюсь...")
+
+
+
+// Выбор кол-ва
+move(574,576)
+waitms(116)
+ldown(574,576)
+waitms(120)
+lup(574,576)
+waitms(230)
+keydown(#$per1)
+waitms(60)
+Keyup(#$per1)
+waitms(60)
+keydown(#$per2)
+waitms(60)
+Keyup(#$per2)
+waitms(60)
+// +1 серебро
+move(862,631)
+waitms(116)
+ldown(862,631)
+waitms(120)
+lup(862,631)
+waitms(230)
+// Заказ на покупку
+move(880,731)
+waitms(116)
+ldown(880,731)
+waitms(120)
+lup(880,731)
+waitms(230)
+// Подтверждение
+GETSCREEN
+IF_PIXEL_IN(508,322, 1014,680, 4173279)
+   waitms(1000)
+   Move($_return1, $_return2)
+   waitms(1000)
+   Ldown($_return1, $_return2)
+   waitms(1000)
+   lup($_return1, $_return2)
+   waitms(1000)
+   else
+   IF_PIXEL_IN(703,565, 902,615,3113970)
+   waitms(1000)
+   Move($_return1, $_return2)
+   waitms(1000)
+   Ldown($_return1, $_return2)
+   waitms(1000)
+   lup($_return1, $_return2)
+   waitms(1000)
+   else
+   IF_PIXEL_IN(703,565, 902,615,117866)
+   waitms(1000)
+   Move($_return1, $_return2)
+   waitms(1000)
+   Ldown($_return1, $_return2)
+   waitms(1000)
+   lup($_return1, $_return2)
+   waitms(1000)
+   else
+   IF_PIXEL_IN(697,570, 908,622, 13363183)
+   waitms(1000)
+   Move($_return1, $_return2)
+   waitms(1000)
+   Ldown($_return1, $_return2)
+   waitms(1000)
+   lup($_return1, $_return2)
+   waitms(1000)
+   else
+   IF_PIXEL_IN(684,538, 917,604, 100074315)
+   waitms(1000)
+   Move($_return1, $_return2)
+   waitms(1000)
+   Ldown($_return1, $_return2)
+   waitms(1000)
+   lup($_return1, $_return2)
+   waitms(1000)
+   else
+   IF_PIXEL_IN(684,538, 917,604, 13744059)
+   waitms(1000)
+   Move($_return1, $_return2)
+   waitms(1000)
+   Ldown($_return1, $_return2)
+   waitms(1000)
+   lup($_return1, $_return2)
+   waitms(1000)
+   else
+   IF_PIXEL_IN(684,538, 917,604, 4603707)
+   waitms(1000)
+   Move($_return1, $_return2)
+   waitms(1000)
+   Ldown($_return1, $_return2)
+   waitms(1000)
+   lup($_return1, $_return2)
+   waitms(1000)
+   else
+   IF_PIXEL_IN(685,539, 907,605, 3913970)
+   waitms(1000)
+   Move($_return1, $_return2)
+   waitms(1000)
+   Ldown($_return1, $_return2)
+   waitms(1000)
+   lup($_return1, $_return2)
+   waitms(1000)
+   else
+   IF_PIXEL_IN(697,562, 913,623, 3913970)
+   waitms(1000)
+   Move($_return1, $_return2)
+   waitms(1000)
+   Ldown($_return1, $_return2)
+   waitms(1000)
+   lup($_return1, $_return2)
+   waitms(1000)
+   else
+   IF_PIXEL_IN(697,562, 913,623, 14809596)
+   waitms(1000)
+   Move($_return1, $_return2)
+   waitms(1000)
+   Ldown($_return1, $_return2)
+   waitms(1000)
+   lup($_return1, $_return2)
+   waitms(1000)
+   else
+   IF_PIXEL_IN(697,562, 913,623, 3977961)
+   waitms(1000)
+   Move($_return1, $_return2)
+   waitms(1000)
+   Ldown($_return1, $_return2)
+   waitms(1000)
+   lup($_return1, $_return2)
+   waitms(1000)
+   else
+   IF_PIXEL_IN(697,562, 913,623, 65793)
+   waitms(1000)
+   Move($_return1, $_return2)
+   waitms(1000)
+   Ldown($_return1, $_return2)
+   waitms(1000)
+   lup($_return1, $_return2)
+   waitms(1000)
+   else
+   IF_PIXEL_IN(697,562, 913,623, 14809596)
+   waitms(1000)
+   Move($_return1, $_return2)
+   waitms(1000)
+   Ldown($_return1, $_return2)
+   waitms(1000)
+   lup($_return1, $_return2)
+   waitms(1000)
+   else
+   IF_PIXEL_IN(697,562, 913,623, 13363183)
+   waitms(1000)
+   Move($_return1, $_return2)
+   waitms(1000)
+   Ldown($_return1, $_return2)
+   waitms(1000)
+   lup($_return1, $_return2)
+   waitms(1000)
+   else
+   IF_PIXEL_IN(697,562, 913,623, 65793)
+   waitms(1000)
+   Move($_return1, $_return2)
+   waitms(1000)
+   Ldown($_return1, $_return2)
+   waitms(1000)
+   lup($_return1, $_return2)
+   waitms(1000)
+   END_IF
+   END_IF
+   END_IF
+   END_IF
+   END_IF
+   END_IF
+   END_IF
+   END_IF
+   END_IF
+   END_IF
+   END_IF
+   END_IF
+   END_IF
+   END_IF
+   END_IF 
+   
+   else
+print("цена ", $priceItem, " хуйня, надо было ", $priceItemMax, ". Поехали дальше.")  
+    MOVE(937,309)   // закрываем заказ
+waitms(100)
+LDOWN(937,309)
+waitms(100)
+LUP(937,309)
+WAITMS(100)
+    $priceItem =  0
+    WAITMS(100)
+$priceItemMax = 0
+WAITMS(100) 
+
+
+
+END_IF
+
+print("Считываю предмет: ", TFREAD($filename, $indexGen + $sdvig))
+print("Его минимальная цена: ", TFREAD($file, $indexGen + $sdvig))
+
+//Выбор второй позиции
+move(1281,518)
+waitms(116)
+ldown(1281,518)
+waitms(120)
+lup(1281,518)
+waitms(230)
+// Выбор качества
+move(836,401)
+waitms(116)
+ldown(836,401)
+waitms(120)
+lup(836,401)
+waitms(230)
+move(831,451)
+waitms(116)
+ldown(831,451)
+waitms(120)
+lup(831,451)
+waitms(230)
+
+MOVE(635,632)  //тык на цену
+waitms(100)
+LDOWN(635,632)
+waitms(100)
+LUP(635,632)
+WAITMS(400)    
+
+KEYDOWN(#CTRL)     // скопировал цену
+WAITMS(100)  
+KEYPRESS(#C)
+WAITMS(100)
+KEYUP(#CTRL)
+
+$priceItem =  FROMCLIP()
+$priceItemMax = TFREAD($file, $indexGen + $sdvig)
+print("Цепанул цену, это: ", $priceItem)
+												WAITMS(100)
+
+IF($priceItem < $priceItemMax)
+       print("Годится. Закупаюсь..." )
+       
+// Выбор кол-ва
+move(574,576)
+waitms(116)
+ldown(574,576)
+waitms(120)
+lup(574,576)
+waitms(230)
+keydown(#$per1)
+waitms(60)
+Keyup(#$per1)
+waitms(60)
+keydown(#$per2)
+waitms(60)
+Keyup(#$per2)
+waitms(60)
+// +1 серебро
+move(862,631)
+waitms(116)
+ldown(862,631)
+waitms(120)
+lup(862,631)
+waitms(230)
+// Заказ на покупку
+move(880,731)
+waitms(116)
+ldown(880,731)
+waitms(120)
+lup(880,731)
+waitms(230)
+// Подтверждение
+GETSCREEN
+// Подтверждение
+GETSCREEN
+IF_PIXEL_IN(508,322, 1014,680, 4173279)
+   waitms(1000)
+   Move($_return1, $_return2)
+   waitms(1000)
+   Ldown($_return1, $_return2)
+   waitms(1000)
+   lup($_return1, $_return2)
+   waitms(1000)
+   else
+   IF_PIXEL_IN(703,565, 902,615,3113970)
+   waitms(1000)
+   Move($_return1, $_return2)
+   waitms(1000)
+   Ldown($_return1, $_return2)
+   waitms(1000)
+   lup($_return1, $_return2)
+   waitms(1000)
+   else
+   IF_PIXEL_IN(703,565, 902,615,117866)
+   waitms(1000)
+   Move($_return1, $_return2)
+   waitms(1000)
+   Ldown($_return1, $_return2)
+   waitms(1000)
+   lup($_return1, $_return2)
+   waitms(1000)
+   else
+   IF_PIXEL_IN(684,538, 917,604, 4603707)
+   waitms(1000)
+   Move($_return1, $_return2)
+   waitms(1000)
+   Ldown($_return1, $_return2)
+   waitms(1000)
+   lup($_return1, $_return2)
+   waitms(1000)
+   else
+   IF_PIXEL_IN(694,547, 910,602,3913970)
+   waitms(1000)
+   Move($_return1, $_return2)
+   waitms(1000)
+   Ldown($_return1, $_return2)
+   waitms(1000)
+   lup($_return1, $_return2)
+   waitms(1000)
+   else
+   IF_PIXEL_IN(703,565, 902,615,3113970)
+   waitms(1000)
+   Move($_return1, $_return2)
+   waitms(1000)
+   Ldown($_return1, $_return2)
+   waitms(1000)
+   lup($_return1, $_return2)
+   waitms(1000)
+   else
+   IF_PIXEL_IN(703,565, 902,615,117866)
+   waitms(1000)
+   Move($_return1, $_return2)
+   waitms(1000)
+   Ldown($_return1, $_return2)
+   waitms(1000)
+   lup($_return1, $_return2)
+   waitms(1000)
+   else
+   IF_PIXEL_IN(697,570, 908,622, 13363183)
+   waitms(1000)
+   Move($_return1, $_return2)
+   waitms(1000)
+   Ldown($_return1, $_return2)
+   waitms(1000)
+   lup($_return1, $_return2)
+   waitms(1000)
+   else
+   IF_PIXEL_IN(684,538, 917,604, 100074315)
+   waitms(1000)
+   Move($_return1, $_return2)
+   waitms(1000)
+   Ldown($_return1, $_return2)
+   waitms(1000)
+   lup($_return1, $_return2)
+   waitms(1000)
+   else
+   IF_PIXEL_IN(684,538, 917,604, 13744059)
+   waitms(1000)
+   Move($_return1, $_return2)
+   waitms(1000)
+   Ldown($_return1, $_return2)
+   waitms(1000)
+   lup($_return1, $_return2)
+   waitms(1000)
+   else
+   IF_PIXEL_IN(684,538, 917,604, 4603707)
+   waitms(1000)
+   Move($_return1, $_return2)
+   waitms(1000)
+   Ldown($_return1, $_return2)
+   waitms(1000)
+   lup($_return1, $_return2)
+   waitms(1000)
+   else
+   IF_PIXEL_IN(685,539, 907,605, 3913970)
+   waitms(1000)
+   Move($_return1, $_return2)
+   waitms(1000)
+   Ldown($_return1, $_return2)
+   waitms(1000)
+   lup($_return1, $_return2)
+   waitms(1000)
+   else
+   IF_PIXEL_IN(697,562, 913,623, 14809596)
+   waitms(1000)
+   Move($_return1, $_return2)
+   waitms(1000)
+   Ldown($_return1, $_return2)
+   waitms(1000)
+   lup($_return1, $_return2)
+   waitms(1000)
+   else
+   IF_PIXEL_IN(697,562, 913,623, 13363183)
+   waitms(1000)
+   Move($_return1, $_return2)
+   waitms(1000)
+   Ldown($_return1, $_return2)
+   waitms(1000)
+   lup($_return1, $_return2)
+   waitms(1000)
+   else
+   IF_PIXEL_IN(697,562, 913,623, 65793)
+   waitms(1000)
+   Move($_return1, $_return2)
+   waitms(1000)
+   Ldown($_return1, $_return2)
+   waitms(1000)
+   lup($_return1, $_return2)
+   waitms(1000)
+   END_IF
+   END_IF
+   END_IF
+   END_IF
+   END_IF
+   END_IF
+   END_IF
+   END_IF
+   END_IF
+   END_IF
+   END_IF 
+   END_IF
+   END_IF
+   END_IF
+   END_IF
+
+Else
+print("цена ", $priceItem, " хуйня, надо было ", $priceItemMax, ". Поехали дальше.")  
+    MOVE(937,309)   // закрываем заказ
+waitms(100)
+LDOWN(937,309)
+waitms(100)
+LUP(937,309)
+WAITMS(100)
+    $priceItem =  0
+    WAITMS(100)
+$priceItemMax = 0
+WAITMS(100) 
+END_IF 
+
+print("Считываю предмет: ", TFREAD($filename, $indexGen + ($sdvig * 2)))
+print("Его минимальная цена: ", TFREAD($file, $indexGen + ($sdvig * 2)))
+//Выбор третьей позиции
+move(1280,611)
+waitms(116)
+ldown(1280,611)
+waitms(120)
+lup(1280,611)
+waitms(230)
+// Выбор качества
+move(836,401)
+waitms(116)
+ldown(836,401)
+waitms(120)
+lup(836,401)
+waitms(230)
+move(831,451)
+waitms(116)
+ldown(831,451)
+waitms(120)
+lup(831,451)
+waitms(230)
+
+MOVE(635,632)  //тык на цену
+waitms(100)
+LDOWN(635,632)
+waitms(100)
+LUP(635,632)
+WAITMS(400) 
+
+KEYDOWN(#CTRL)     // скопировал цену
+WAITMS(100)  
+KEYPRESS(#C)
+WAITMS(100)
+KEYUP(#CTRL)
+
+$priceItem =  FROMCLIP()
+	WAITMS(100)
+$priceItemMax = TFREAD($file, $indexGen + ($sdvig * 2))
+	WAITMS(100)
+print("Цепанул цену, это: ", $priceItem)
+												WAITMS(100)
+
+IF($priceItem < $priceItemMax)
+
+          print("Годится. Закупаюсь...")
+
+
+// Выбор кол-ва
+move(574,576)
+waitms(116)
+ldown(574,576)
+waitms(120)
+lup(574,576)
+waitms(230)
+keydown(#$per1)
+waitms(60)
+Keyup(#$per1)
+waitms(60)
+keydown(#$per2)
+waitms(60)
+Keyup(#$per2)
+waitms(60)
+// +1 серебро
+move(862,631)
+waitms(116)
+ldown(862,631)
+waitms(120)
+lup(862,631)
+waitms(230)
+// Заказ на покупку
+move(880,731)
+waitms(116)
+ldown(880,731)
+waitms(120)
+lup(880,731)
+waitms(230)
+// Подтверждение
+GETSCREEN
+// Подтверждение
+GETSCREEN
+IF_PIXEL_IN(508,322, 1014,680, 4173279)
+   waitms(1000)
+   Move($_return1, $_return2)
+   waitms(1000)
+   Ldown($_return1, $_return2)
+   waitms(1000)
+   lup($_return1, $_return2)
+   waitms(1000) 
+   else
+   IF_PIXEL_IN(703,565, 902,615,3113970)
+   waitms(1000)
+   Move($_return1, $_return2)
+   waitms(1000)
+   Ldown($_return1, $_return2)
+   waitms(1000)
+   lup($_return1, $_return2)
+   waitms(1000)
+   else
+   IF_PIXEL_IN(692,541, 914,608,3977941)
+   waitms(1000)
+   Move($_return1, $_return2)
+   waitms(1000)
+   Ldown($_return1, $_return2)
+   waitms(1000)
+   lup($_return1, $_return2)
+   waitms(1000)
+   else
+   IF_PIXEL_IN(690,542, 909,604,3913970)
+   waitms(1000)
+   Move($_return1, $_return2)
+   waitms(1000)
+   Ldown($_return1, $_return2)
+   waitms(1000)
+   lup($_return1, $_return2)
+   waitms(1000)
+   else
+   IF_PIXEL_IN(683,536, 913,608,14612474)
+   waitms(1000)
+   Move($_return1, $_return2)
+   waitms(1000)
+   Ldown($_return1, $_return2)
+   waitms(1000)
+   lup($_return1, $_return2)
+   waitms(1000)
+   else
+   IF_PIXEL_IN(694,547, 910,602,3913970)
+   waitms(1000)
+   Move($_return1, $_return2)
+   waitms(1000)
+   Ldown($_return1, $_return2)
+   waitms(1000)
+   lup($_return1, $_return2)
+   waitms(1000)
+   else
+   IF_PIXEL_IN(684,538, 917,604, 4603707)
+   waitms(1000)
+   Move($_return1, $_return2)
+   waitms(1000)
+   Ldown($_return1, $_return2)
+   waitms(1000)
+   lup($_return1, $_return2)
+   waitms(1000)
+   else
+   IF_PIXEL_IN(697,562, 913,623, 14809596)
+   waitms(1000)
+   Move($_return1, $_return2)
+   waitms(1000)
+   Ldown($_return1, $_return2)
+   waitms(1000)
+   lup($_return1, $_return2)
+   waitms(1000)
+   else
+   IF_PIXEL_IN(697,562, 913,623, 13363183)
+   waitms(1000)
+   Move($_return1, $_return2)
+   waitms(1000)
+   Ldown($_return1, $_return2)
+   waitms(1000)
+   lup($_return1, $_return2)
+   waitms(1000)
+   else
+   IF_PIXEL_IN(697,562, 913,623, 65793)
+   waitms(1000)
+   Move($_return1, $_return2)
+   waitms(1000)
+   Ldown($_return1, $_return2)
+   waitms(1000)
+   lup($_return1, $_return2)
+   waitms(1000)
+   END_IF
+   END_IF
+   END_IF
+   END_IF
+   END_IF
+   END_IF
+   END_IF
+   END_IF
+   END_IF
+   END_IF
+
+Else
+print("цена ", $priceItem, " хуйня, надо было ", $priceItemMax, ". Поехали дальше.")  
+    MOVE(937,309)   // закрываем заказ
+waitms(100)
+LDOWN(937,309)
+waitms(100)
+LUP(937,309)
+WAITMS(100)
+    $priceItem =  0
+    WAITMS(100)
+$priceItemMax = 0
+WAITMS(100) 
+END_IF 
+
+END_SUB
+
+
+
+// Мои заказы
+waitms(230)
+ldown(1390,584)
+waitms(230)
+lup(1390,584)
+waitms(230)
+// Выбор категории
+ldown(826,271)
+waitms(230)
+lup(826,271)
+waitms(230)
+// Передвижение по категориям
+move(823,346)
+waitms(1000)
+// Выбор подкатегории  ( Ткань бронь )
+move(950,356)
+waitms(1000)
+ldown(950,356)
+waitms(1000)
+lup(950,356)
+waitms(1000)
+
+// Мои заказы
+waitms(1000)
+ldown(1390,584)
+waitms(1000)
+lup(1390,584)
+waitms(1000)
+
+
+
+setlvl(5,0) // 5 - уровень, 0 - чар
+zakupka1(2,0)// 4,0 это кол-во = 40
+
+setlvl(5,1) 
+zakupka1(0,7)
+
+setlvl(6,0)
+zakupka1(1,0)
+
+setlvl(6,1)
+zakupka1(0,3)
+
+setlvl(7,0)
+zakupka1(0,3)
+
+setlvl(7,1)
+zakupka1(0,2)
+
+setlvl(8,0)
+zakupka1(0,1)
+
+$indexgen=$indexgen+$sdvig*2,125
+//   Ткань Шлем
+// Мои заказы
+waitms(230)
+ldown(1390,584)
+waitms(230)
+lup(1390,584)
+waitms(230)
+
+// Выбор категории
+ldown(826,271)
+waitms(230)
+lup(826,271)
+waitms(230)
+// Передвижение по категориям
+move(823,346)
+waitms(315)
+// Выбор подкатегории  ( Ткань шлем )
+move(964,383)
+waitms(186)
+ldown(964,383)
+waitms(110)
+lup(964,383)
+waitms(230)
+
+setlvl(5,0) // 5 - уровень, 0 - чар
+zakupka1(2,0)// 4,0 это кол-во = 40
+
+setlvl(5,1) 
+zakupka1(0,7)
+
+setlvl(6,0)
+zakupka1(1,0)
+
+setlvl(6,1)
+zakupka1(0,3)
+
+setlvl(7,0)
+zakupka1(0,3)
+
+setlvl(7,1)
+zakupka1(0,2)
+
+setlvl(8,0)
+zakupka1(0,1)
+
+$indexgen=$indexgen+$sdvig*2,125
+//   Ткань Обувь
+// Мои заказы
+waitms(230)
+ldown(1390,584)
+waitms(230)
+lup(1390,584)
+waitms(230)
+
+// Выбор категории
+ldown(826,271)
+waitms(230)
+lup(826,271)
+waitms(230)
+// Передвижение по категориям
+move(823,346)
+waitms(315)
+// Выбор подкатегории  ( Ткань обувь )
+move(948,411)
+waitms(186)
+ldown(948,411)
+waitms(110)
+lup(948,411)
+waitms(230)
+
+setlvl(5,0) // 5 - уровень, 0 - чар
+zakupka1(2,0)// 4,0 это кол-во = 40
+
+setlvl(5,1) 
+zakupka1(0,7)
+
+setlvl(6,0)
+zakupka1(1,0)
+
+setlvl(6,1)
+zakupka1(0,3)
+
+setlvl(7,0)
+zakupka1(0,3)
+
+setlvl(7,1)
+zakupka1(0,2)
+
+               
+setlvl(8,0)
+zakupka1(0,1)
+
+$indexgen=$indexgen+$sdvig*2,125
+//   Кож бронь
+// Мои заказы
+waitms(230)
+ldown(1390,584)
+waitms(230)
+lup(1390,584)
+waitms(230)
+
+// Выбор категории
+ldown(826,271)
+waitms(230)
+lup(826,271)
+waitms(350)
+// Передвижение по категориям
+move(823,346)
+waitms(400)
+// Выбор подкатегории  ( Кож броня )
+move(943,436)
+waitms(186)
+ldown(943,436)
+waitms(110)
+lup(943,436)
+waitms(230)
+
+setlvl(5,0) // 5 - уровень, 0 - чар
+zakupka1(2,0)// 4,0 это кол-во = 40
+
+setlvl(5,1) 
+zakupka1(0,7)
+
+setlvl(6,0)
+zakupka1(1,0)
+
+setlvl(6,1)
+zakupka1(0,3)
+
+setlvl(7,0)
+zakupka1(0,3)
+
+setlvl(7,1)
+zakupka1(0,2)
+
+
+setlvl(8,0)
+zakupka1(0,1)
+
+$indexgen=$indexgen+$sdvig*2,125
+//   Кож бронь шлем
+
+// Выбор категории
+ldown(826,271)
+waitms(230)
+lup(826,271)
+waitms(350)
+// Передвижение по категориям
+move(823,346)
+waitms(400)
+// Выбор подкатегории  ( Шлем кожь )
+move(949,458)
+waitms(230)
+ldown(949,458)
+waitms(230)
+lup(949,458)
+waitms(230)
+
+setlvl(5,0) // 5 - уровень, 0 - чар
+zakupka1(2,0)// 4,0 это кол-во = 40
+
+setlvl(5,1) 
+zakupka1(0,7)
+
+setlvl(6,0)
+zakupka1(1,0)
+
+setlvl(6,1)
+zakupka1(0,3)
+
+setlvl(7,0)
+zakupka1(0,3)
+
+setlvl(7,1)
+zakupka1(0,2)
+
+setlvl(8,0)
+zakupka1(0,1)
+
+$indexgen=$indexgen+$sdvig*2,125
+//   Кож обувь
+// Мои заказы
+waitms(230)
+ldown(1390,584)
+waitms(230)
+lup(1390,584)
+waitms(230)
+
+// Выбор категории
+ldown(826,271)
+waitms(230)
+lup(826,271)
+waitms(230)
+// Передвижение по категориям
+move(823,346)
+waitms(400)
+// Выбор подкатегории  ( Кож обувь )
+move(960,494)
+waitms(230)
+ldown(960,494)
+waitms(230)
+lup(960,494)
+waitms(230)
+
+setlvl(5,0) // 5 - уровень, 0 - чар
+zakupka1(2,0)// 4,0 это кол-во = 40
+
+setlvl(5,1) 
+zakupka1(0,7)
+
+setlvl(6,0)
+zakupka1(1,0)
+
+setlvl(6,1)
+zakupka1(0,3)
+
+setlvl(7,0)
+zakupka1(0,3)
+
+setlvl(7,1)
+zakupka1(0,2)
+
+
+setlvl(8,0)
+zakupka1(0,1)
+
+$indexgen=$indexgen+$sdvig*2,125
+//   Латные брони
+// Мои заказы
+waitms(230)
+ldown(1390,584)
+waitms(230)
+lup(1390,584)
+waitms(230)
+
+
+// Выбор категории
+ldown(826,271)
+waitms(230)
+lup(826,271)
+waitms(230)
+// Передвижение по категориям
+move(823,346)
+waitms(400)
+// Выбор подкатегории  ( Латы Бронь )
+move(964,511)
+waitms(230)
+ldown(964,511)
+waitms(230)
+lup(964,511)
+waitms(230)
+
+setlvl(5,0) // 5 - уровень, 0 - чар
+zakupka1(2,0)// 4,0 это кол-во = 40
+
+setlvl(5,1) 
+zakupka1(0,7)
+
+setlvl(6,0)
+zakupka1(1,0)
+
+setlvl(6,1)
+zakupka1(0,3)
+
+setlvl(7,0)
+zakupka1(0,3)
+
+setlvl(7,1)
+zakupka1(0,2)
+
+
+setlvl(8,0)
+zakupka1(0,1)
+
+$indexgen=$indexgen+$sdvig*2,125
+//   Латные шлема
+// Мои заказы
+waitms(230)
+ldown(1390,584)
+waitms(230)
+lup(1390,584)
+waitms(230)
+
+// Выбор категории
+ldown(826,271)
+waitms(230)
+lup(826,271)
+waitms(230)
+// Передвижение по категориям
+move(823,346)
+waitms(315)
+// Выбор подкатегории  ( Латы шлема )
+move(948,538)
+waitms(230)
+ldown(948,538)
+waitms(230)
+lup(948,538)
+waitms(230)
+
+setlvl(5,0) // 5 - уровень, 0 - чар
+zakupka1(2,0)// 4,0 это кол-во = 40
+
+setlvl(5,1) 
+zakupka1(0,7)
+
+setlvl(6,0)
+zakupka1(1,0)
+
+setlvl(6,1)
+zakupka1(0,3)
+
+setlvl(7,0)
+zakupka1(0,3)
+
+setlvl(7,1)
+zakupka1(0,2)
+
+
+setlvl(8,0)
+zakupka1(0,1)
+
+$indexgen=$indexgen+$sdvig*2,125
+//   Латные ножки
+// Мои заказы
+waitms(230)
+ldown(1390,584)
+waitms(230)
+lup(1390,584)
+waitms(230)
+
+// Выбор категории
+ldown(826,271)
+waitms(230)
+lup(826,271)
+waitms(230)
+// Передвижение по категориям
+move(823,346)
+waitms(315)
+// Выбор подкатегории  ( Латы ноги )
+move(966,564)
+waitms(230)
+ldown(966,564)
+waitms(230)
+lup(966,564)
+waitms(230)
+
+setlvl(5,0) // 5 - уровень, 0 - чар
+zakupka1(2,0)// 4,0 это кол-во = 40
+
+setlvl(5,1) 
+zakupka1(0,7)
+
+setlvl(6,0)
+zakupka1(1,0)
+
+setlvl(6,1)
+zakupka1(0,3)
+
+setlvl(7,0)
+zakupka1(0,3)
+
+setlvl(7,1)
+zakupka1(0,2)
+
+
+setlvl(8,0)
+zakupka1(0,1)
+
+$indexgen=$indexgen+$sdvig*2,125
+$sdvig=5
+//   Ближний бой Перчатки
+// Мои заказы
+waitms(230)
+ldown(1390,584)
+waitms(230)
+lup(1390,584)
+waitms(230)
+
+// Выбор категории
+ldown(826,271)
+waitms(230)
+lup(826,271)
+waitms(230)
+// Передвижение по категориям
+move(819,645)
+waitms(700)
+// Выбор подкатегории  ( Перчи )
+move(944,731)
+waitms(230)
+ldown(944,731)
+waitms(230)
+lup(944,731)
+waitms(230)
+
+setlvl(5,0) // 5 - уровень, 0 - чар
+zakupka1(0,6)// 4,0 это кол-во = 40
+
+setlvl(5,1) 
+zakupka1(0,4)
+
+setlvl(6,0)
+zakupka1(0,3)
+
+setlvl(6,1)
+zakupka1(0,2)
+
+setlvl(7,0)
+zakupka1(0,1)
+
+$indexgen=$indexgen+$sdvig*2
+//   Ближний бой Кинжалы
+// Мои заказы
+waitms(230)
+ldown(1390,584)
+waitms(230)
+lup(1390,584)
+waitms(230)
+
+// Выбор категории
+ldown(826,271)
+waitms(230)
+lup(826,271)
+waitms(230)
+// Передвижение по категориям
+move(819,645)
+waitms(350)
+// Выбор подкатегории  ( Кинжалы )
+move(915,670)
+waitms(230)
+ldown(915,670)
+waitms(230)
+lup(915,670)
+waitms(230)
+
+setlvl(5,0) // 5 - уровень, 0 - чар
+zakupka1(0,6)// 4,0 это кол-во = 40
+
+setlvl(5,1) 
+zakupka1(0,4)
+
+setlvl(6,0)
+zakupka1(0,3)
+
+setlvl(6,1)
+zakupka1(0,2)
+
+setlvl(7,0)
+zakupka1(0,1)
+
+
+$indexgen=$indexgen+$sdvig*2
+//   Магия Проклятый
+// Мои заказы
+waitms(230)
+ldown(1390,584)
+waitms(230)
+lup(1390,584)
+waitms(230)
+// Выбор категории
+ldown(826,271)
+waitms(230)
+lup(826,271)
+waitms(230)
+// Передвижение по категориям
+move(811,597)
+waitms(350)
+// Выбор подкатегории  ( Проклятый )
+move(939,627)
+waitms(230)
+ldown(939,627)
+waitms(230)
+lup(939,627)
+waitms(230)
+
+setlvl(5,0) // 5 - уровень, 0 - чар
+zakupka1(0,6)// 4,0 это кол-во = 40
+
+setlvl(5,1) 
+zakupka1(0,4)
+
+setlvl(6,0)
+zakupka1(0,3)
+
+setlvl(6,1)
+zakupka1(0,2)
+
+setlvl(7,0)
+zakupka1(0,1)
+
+$indexgen=$indexgen+$sdvig*2
+//   Дальний - Арбалеты
+// Мои заказы
+waitms(230)
+ldown(1390,584)
+waitms(230)
+lup(1390,584)
+waitms(230)
+// Выбор категории
+ldown(826,271)
+waitms(230)
+lup(826,271)
+waitms(230)
+// Передвижение по категориям
+move(823,782)
+waitms(350)
+// Выбор подкатегории  ( Арбали )
+move(926,806)
+waitms(230)
+ldown(926,806)
+waitms(230)
+lup(926,806)
+waitms(230)
+
+setlvl(5,0) // 5 - уровень, 0 - чар
+zakupka1(0,6)// 4,0 это кол-во = 40
+
+setlvl(5,1) 
+zakupka1(0,4)
+
+setlvl(6,0)
+zakupka1(0,3)
+
+setlvl(6,1)
+zakupka1(0,2)
+
+setlvl(7,0)
+zakupka1(0,1)
+
+$indexgen=$indexgen+$sdvig*2
+//   Ближний бой Мечи
+// Мои заказы
+waitms(230)
+ldown(1390,584)
+waitms(230)
+lup(1390,584)
+waitms(230)
+
+// Выбор категории
+ldown(826,271)
+waitms(230)
+lup(826,271)
+waitms(230)
+// Передвижение по категориям
+move(819,645)
+waitms(350)
+// Выбор подкатегории  ( Мечи )
+move(940,840)
+waitms(230)
+ldown(940,840)
+waitms(230)
+lup(940,840)
+waitms(230)
+
+setlvl(5,0) // 5 - уровень, 0 - чар
+zakupka1(0,6)// 4,0 это кол-во = 40
+
+setlvl(5,1) 
+zakupka1(0,4)
+
+setlvl(6,0)
+zakupka1(0,3)
+
+setlvl(6,1)
+zakupka1(0,2)
+
+setlvl(7,0)
+zakupka1(0,1)
+
+
+//   Дальний - Луки
+// Мои заказы 
+waitms(230)
+ldown(1390,584)
+waitms(230)
+lup(1390,584)
+waitms(230)
+// Выбор категории
+ldown(826,271)
+waitms(230)
+lup(826,271)
+waitms(230)
+// Передвижение по категориям
+move(823,782)
+waitms(350)
+// Выбор подкатегории  ( Лук эт зис шит )
+move(933,786)
+waitms(230)
+ldown(933,786)
+waitms(230)
+lup(933,786)
+waitms(230)
+
+setlvl(5,0) // 5 - уровень, 0 - чар
+zakupka1(0,6)// 4,0 это кол-во = 40
+
+setlvl(5,1) 
+zakupka1(0,4)
+
+setlvl(6,0)
+zakupka1(0,3)
+
+setlvl(6,1)
+zakupka1(0,2)
+
+setlvl(7,0)
+zakupka1(0,1)
+
+
+//   Ближний бой Молоты
+// Мои заказы
+waitms(230)
+ldown(1390,584)
+waitms(230)
+lup(1390,584)
+waitms(230)
+
+// Выбор категории
+ldown(826,271)
+waitms(230)
+lup(826,271)
+waitms(230)
+// Передвижение по категориям
+move(819,645)
+waitms(350)
+// Выбор подкатегории  ( Молоты )
+move(929,702)
+waitms(230)
+ldown(929,702)
+waitms(230)
+lup(929,702)
+waitms(230)
+
+setlvl(5,0) // 5 - уровень, 0 - чар
+zakupka1(0,6)// 4,0 это кол-во = 40
+
+setlvl(5,1) 
+zakupka1(0,4)
+
+setlvl(6,0)
+zakupka1(0,3)
+
+setlvl(6,1)
+zakupka1(0,2)
+
+setlvl(7,0)
+zakupka1(0,1)
+
+$indexgen=$indexgen+$sdvig*2
+
+//   Ближний бой Копья
+// Мои заказы
+waitms(230)
+ldown(1390,584)
+waitms(230)
+lup(1390,584)
+waitms(230)
+
+// Выбор категории
+ldown(826,271)
+waitms(230)
+lup(826,271)
+waitms(230)
+// Передвижение по категориям
+move(819,645)
+waitms(350)
+// Выбор подкатегории  ( Копья )
+move(931,804)
+waitms(230)
+ldown(931,804)
+waitms(230)
+lup(931,804)
+waitms(230)
+
+setlvl(5,0) // 5 - уровень, 0 - чар
+zakupka1(0,6)// 4,0 это кол-во = 40
+
+setlvl(5,1) 
+zakupka1(0,4)
+
+setlvl(6,0)
+zakupka1(0,3)
+
+setlvl(6,1)
+zakupka1(0,2)
+
+setlvl(7,0)
+zakupka1(0,1)
+
+
+$indexgen=$indexgen+$sdvig*2
+
+//   Ближний бой Булавы
+// Мои заказы
+waitms(230)
+ldown(1390,584)
+waitms(230)
+lup(1390,584)
+waitms(230)
+
+// Выбор категории
+ldown(826,271)
+waitms(230)
+lup(826,271)
+waitms(230)
+// Передвижение по категориям
+move(819,645)
+waitms(350)
+// Выбор подкатегории  ( Булавы )
+move(931,751)
+waitms(230)
+ldown(931,751)
+waitms(230)
+lup(931,751)
+waitms(230)
+
+setlvl(5,0) // 5 - уровень, 0 - чар
+zakupka1(0,6)// 4,0 это кол-во = 40
+
+setlvl(5,1) 
+zakupka1(0,4)
+
+setlvl(6,0)
+zakupka1(0,3)
+
+setlvl(6,1)
+zakupka1(0,2)
+
+setlvl(7,0)
+zakupka1(0,1)
+
+
+//   Ближний бой Топоры
+// Мои заказы
+waitms(230)
+ldown(1390,584)
+waitms(230)
+lup(1390,584)
+waitms(230)
+
+// Выбор категории
+ldown(826,271)
+waitms(230)
+lup(826,271)
+waitms(230)
+// Передвижение по категориям
+move(819,645)
+waitms(350)
+// Выбор подкатегории  ( Топоры )
+move(928,652)
+waitms(230)
+ldown(928,652)
+waitms(230)
+lup(925,652)
+waitms(230)
+
+setlvl(5,0) // 5 - уровень, 0 - чар
+zakupka1(0,6)// 4,0 это кол-во = 40
+
+setlvl(5,1) 
+zakupka1(0,4)
+
+setlvl(6,0)
+zakupka1(0,3)
+
+setlvl(6,1)
+zakupka1(0,2)
+
+setlvl(7,0)
+zakupka1(0,1)
+
+$indexgen=$indexgen+$sdvig*2
+
+//   Ближний бой Шесты
+// Мои заказы
+waitms(230)
+ldown(1390,584)
+waitms(230)
+lup(1390,584)
+waitms(230)
+
+// Выбор категории
+ldown(826,271)
+waitms(230)
+lup(826,271)
+waitms(230)
+// Передвижение по категориям
+move(819,645)
+waitms(350)
+// Выбор подкатегории  ( Шесты )
+move(927,780)
+waitms(230)
+ldown(927,780)
+waitms(230)
+lup(927,780)
+waitms(230)
+
+setlvl(5,0) // 5 - уровень, 0 - чар
+zakupka1(0,6)// 4,0 это кол-во = 40
+
+setlvl(5,1) 
+zakupka1(0,4)
+
+setlvl(6,0)
+zakupka1(0,3)
+
+setlvl(6,1)
+zakupka1(0,2)
+
+setlvl(7,0)
+zakupka1(0,1)
+
+$indexgen=$indexgen+$sdvig*2
+$sdvig=7
+
+#include "css1.cms"
+
+wait(1)
+
+#include "css.cms"
+
+$indexgen=0
+
+LDOWN(1336,270)
+WAITMS(50)
+LUP(1336,270)
+WAIT(300)
+LDOWN(1386,580)
+WAITMS(50)
+LUP(1386,580)
